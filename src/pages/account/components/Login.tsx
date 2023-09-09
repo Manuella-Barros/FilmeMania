@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Form from "../../../components/form/Form";
 import { InputFieldProps } from "../../../components/inputField/InputField";
 import * as Style from "../Account.styles";
@@ -26,7 +27,7 @@ function Login() {
 
             <Style.OptionsContainer>
                 <p>Não possui conta?</p>
-                <span>Cadastre-se</span>
+                <Link to={"/account/signup"}>Cadastre-se</Link>
             </Style.OptionsContainer>
         </>
     );

@@ -10,8 +10,7 @@ function Navbar() {
                     </Link>
                     <div>
                         <Link to={'/'}>Home</Link>
-                        <Link to={'./profile'}>Perfil</Link>
-                        <Link to={'./account'}>Sair / Entrar</Link>
+                        <Link to={'./account/login'}>Perfil</Link>
                     </div>
                 </section>
         </Style.Nav>

@@ -23,4 +23,13 @@ export const InputField = styled.div`
         display: none;
     }
 
+    section{
+        display: flex;
+        justify-content: space-between;
+
+        div{
+            display: flex;
+            width: 30%;
+        }
+    }
 `

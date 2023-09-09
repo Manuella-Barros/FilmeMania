@@ -1,9 +1,7 @@
 import Form from "../../../components/form/Form";
-
 import * as Style from "../Account.styles";
-import { styled } from "styled-components";
-
-import InputField, { InputFieldProps } from "../../../components/inputField/InputField";
+import { InputFieldProps } from "../../../components/inputField/InputField";
+import { Link } from "react-router-dom";
 
 const inputs: InputFieldProps[] = [
     {
@@ -30,39 +28,16 @@ const inputs: InputFieldProps[] = [
     },
 ]
 
-export const FormWrapper = styled.form`
-    margin-block: 2rem;
-    background-color: red !important;
-    width: 76%;
-    
-`
-
 function Signup() {
     return (
         <>
             <h1>Cadastro</h1>
 
-            {/* <Form inputs={inputs} buttonContent={"Cadastrar"}/> */}
-
-            <FormWrapper>
-                {
-                    inputs.map((input, i) => {
-                        return <InputField 
-                                    key={i}
-                                    label={input.label} 
-                                    type={input.type} 
-                                    id={input.id}
-                                    placeholder={input?.placeholder}
-                                    name={input?.name}
-                                    radioInfo={input?.radioInfo}
-                                />
-                    })
-                }
-            </FormWrapper>
+            <Form inputs={inputs} buttonContent={"Cadastrar"}/>
 
             <Style.OptionsContainer>
-                <p>Não possui conta?</p>
-                <span>Cadastre-se</span>
+                <p>Já possui conta?</p>
+                <Link to={"/account/login"}>Entre</Link>
             </Style.OptionsContainer>
         </>
     );

@@ -10,7 +10,7 @@ function Account() {
             </picture>
             
             
-            <Style.AccountContent style={{background: 'yellow'}}>
+            <Style.AccountContent>
                 <Outlet/>
             </Style.AccountContent>
         </Style.Main>

@@ -1,7 +1,20 @@
+import MovieContainer from "../../components/movieContainer/MovieContainer";
+import * as Style from "./Home.styles";
+
 function Home() {
     return (
         <main>
-            <h1>Home</h1>
+
+            <Style.AllMovies>
+                <MovieContainer/>
+                <MovieContainer/>
+                <MovieContainer/>
+                <MovieContainer/>
+                <MovieContainer/>
+                <MovieContainer/>
+                <MovieContainer/>
+                <MovieContainer/>
+            </Style.AllMovies>
         </main>
     );
 }

@@ -9,7 +9,7 @@ interface FormProps {
 
 function Form({inputs, buttonContent}: FormProps) {
     return (
-        <Style.FormWrapper>
+        <Style.Form>
                 {
                     inputs.map((input, i) => {
                         return <InputField 
@@ -27,7 +27,7 @@ function Form({inputs, buttonContent}: FormProps) {
             <Style.ButtonContainer>
                 <Button>{buttonContent}</Button>
             </Style.ButtonContainer>
-        </Style.FormWrapper>
+        </Style.Form>
     );
 }
 

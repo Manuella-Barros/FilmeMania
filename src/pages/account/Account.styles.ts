@@ -9,12 +9,11 @@ export const Main = styled.main`
 
     picture {
         overflow: hidden;
+        clip-path: polygon(0 0, 96% 0, 100% 100%, 0% 100%);
 
         img{
             height: 100%;
-            //transform: rotate(10deg);
         }
-        background-color: red;
     }
 `
 
@@ -30,16 +29,17 @@ export const AccountContent = styled.article`
         font-weight: 400;
     }
 
-    /* form{
+    form{
         width: 70%;
-        background-color: red;
-    } */
+    }
 `
 
 export const OptionsContainer = styled.section`
     text-align: center;
+    display: inline;
 
-    span{
-        color: ${({theme}) => theme.COLORS.PRIMARY}
+    a{
+        color: ${({theme}) => theme.COLORS.PRIMARY};
+        font-size: 1rem;
     }
 `

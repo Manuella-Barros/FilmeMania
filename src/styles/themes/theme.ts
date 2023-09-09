@@ -5,7 +5,7 @@ export const defaultTheme = {
         STARS_COLOR: '#DAA520'
     },
     FONT:{
-        PRIMARY: "'Plus Jakarta Sans', sans-serif'",
+        PRIMARY: "'Plus Jakarta Sans', sans-serif",
         SECONDARY: "'Josefin Sans', sans-serif",
     }
 } as const

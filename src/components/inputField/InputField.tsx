@@ -20,18 +20,18 @@ function InputField({label, id, type, name, radioInfo, ...props}: InputFieldProp
             <Style.InputField>
                 <p>Generos Favoritos</p>
 
-                <div>
+                <section>
                 {
-                    radioInfo?.map(radio => {
+                    radioInfo?.map((radio, i) => {
                         return(
-                            <>
+                            <div key={i}>
                                 <input value={radio.value} id={radio.value} name={name} type={type}/>
                                 <label htmlFor={radio.value}>{radio.label}</label>
-                            </>
+                            </div>
                         )
                     })
                 }
-                </div>
+                </section>
             </Style.InputField>    
         );
 
