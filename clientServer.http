@@ -1,0 +1,6 @@
+
+GET https://api.themoviedb.org/3/movie/popular?api_key=4c0be9640a445d8c45b253da0e1085dc
+
+# GET https://api.themoviedb.org/3/movie/changes?api_key=4c0be9640a445d8c45b253da0e1085dc
+
+# GET https://api.themoviedb.org/3/movie/11?api_key=4c0be9640a445d8c45b253da0e1085dc

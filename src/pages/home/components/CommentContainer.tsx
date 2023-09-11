@@ -3,8 +3,11 @@ import InputField from "../../../components/inputField/InputField";
 import * as Style from "../Home.styles";
 import RatingStars from "../../../components/ratingStars/RatingStars";
 import Button from "../../../components/button/Button";
+import { getMoviesByName } from "../../../fetch/API_TMDB";
 
 function CommentContainer() {
+    getMoviesByName();
+
     return (
         <Style.CommentContainer>
             <picture>
