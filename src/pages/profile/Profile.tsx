@@ -1,4 +1,5 @@
 import Button from "../../components/button/Button";
+import InputField from "../../components/inputField/InputField";
 import MovieContainer from "../../components/movieContainer/MovieContainer";
 import * as Style from "./Profile.styles";
 
@@ -6,7 +7,7 @@ function Profile() {
     return (
         <Style.Main>
             <Style.Profile>
-                <h2>Manuzinha</h2>
+                <h1>Manuzinha</h1>
 
                 <Style.FavGenres>
                     <p>Drama</p>
@@ -20,11 +21,16 @@ function Profile() {
 
                 <Style.PainelModerador>
                     <h2>Painel do Moderador</h2>
+
+                    <InputField label="Pesquisar usuário" placeholder="Insira o nome do usuario"/>
+                    <Button>Excluir</Button>
+                    <Button>Limpar Postagens</Button>
+                    <Button>Promover a MOD</Button>
                 </Style.PainelModerador>
             </Style.Profile>
 
             <Style.Movies>
-                <h2>Suas postagens</h2>
+                <h1>Suas postagens</h1>
                 <MovieContainer/>
                 <MovieContainer/>
                 <MovieContainer/>
