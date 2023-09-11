@@ -1,47 +1,40 @@
+import { HTMLProps } from 'react';
 import * as Style from './InputField.styles';
+import SelectGenre from './components/SelectGenre';
 
-interface RadioInfo {
-    value: string,
+export interface InputFieldProps extends HTMLProps<HTMLInputElement> {
     label: string,
 }
 
-export interface InputFieldProps {
-    label: string,
-    type: React.HTMLInputTypeAttribute;
-    id?: string,
-    placeholder?: string,
-    name?: string,
-    radioInfo?: RadioInfo[],
-}
+function InputField({label, ...props}: InputFieldProps) {
 
-function InputField({label, id, type, name, radioInfo, ...props}: InputFieldProps) {
-    if(id == "favGender" || name == "favGender"){
+    if(props.id == "comentario"){
+        return(
+            <Style.InputField>
+                <label htmlFor="comentario">Comentário</label>
+                <textarea id="comentario" rows={7}/>
+            </Style.InputField>
+        )
+    } else if(props.id == "favGenre"){
         return (
             <Style.InputField>
-                <p>Generos Favoritos</p>
-
-                <section>
-                {
-                    radioInfo?.map((radio, i) => {
-                        return(
-                            <div key={i}>
-                                <input value={radio.value} id={radio.value} name={name} type={type}/>
-                                <label htmlFor={radio.value}>{radio.label}</label>
-                            </div>
-                        )
-                    })
-                }
-                </section>
+                <div>
+                    <label htmlFor="favGenre">{label}</label>
+                    <div>
+                        <SelectGenre/>
+                        <SelectGenre/>
+                        <SelectGenre/>
+                    </div>
+                </div>     
             </Style.InputField>    
-        );
-
+        )     
     } else{
         return (
             <Style.InputField>
-                <label htmlFor={id}>{label}</label>
-                <input id={id} {...props}/>
+                <label htmlFor={props.id}>{label}</label>
+                <input {...props}/>
             </Style.InputField>    
-        );
+        )   
     }
 }
 

@@ -1,31 +1,39 @@
 import Button from "../button/Button";
-import InputField, { InputFieldProps } from "../inputField/InputField";
+import InputField from "../inputField/InputField";
 import * as Style from "./Form.styles";
+import SelectGenre from "../inputField/components/SelectGenre";
 
-interface FormProps {
-    inputs: InputFieldProps[],
-    buttonContent: string,
+export interface InputInterface {
+    label: string,
+    type?: string, 
+    id?: string,
+    placeholder?: string,
 }
 
-function Form({inputs, buttonContent}: FormProps) {
+interface FormProps {
+    buttonContent: string,
+    inputs: InputInterface[];
+}
+
+
+function Form({buttonContent, inputs}: FormProps) {
     return (
         <Style.Form>
-                {
-                    inputs.map((input, i) => {
-                        return <InputField 
-                                    key={i}
-                                    label={input.label} 
-                                    type={input.type} 
-                                    id={input.id}
-                                    placeholder={input?.placeholder}
-                                    name={input?.name}
-                                    radioInfo={input?.radioInfo}
-                                />
-                    })
-                }
+            
+            {
+                inputs.map((input, i) => {
+                    return <InputField
+                            key={i}
+                            label={input.label} 
+                            type={input.type} 
+                            id={input.id}
+                            placeholder={input?.placeholder}
+                        />  
+                })
+            }
 
             <Style.ButtonContainer>
-                <Button>{buttonContent}</Button>
+                <Button type={"submit"}>{buttonContent}</Button>
             </Style.ButtonContainer>
         </Style.Form>
     );

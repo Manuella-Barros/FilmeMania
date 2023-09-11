@@ -1,11 +1,10 @@
 import * as Style from "./Button.style";
 
-interface ButtonProps {
+interface ButtonInterface extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     children: React.ReactNode,
-    
 }
 
-function Button({children}: ButtonProps) {
+function Button({children}: ButtonInterface) {
     return (
         <Style.Button>{children}</Style.Button>
     );

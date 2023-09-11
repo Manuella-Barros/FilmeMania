@@ -5,10 +5,11 @@ export const GlobalStyle = createGlobalStyle`
         padding: 0;
         margin: 0;
         box-sizing: border-box;
+        transition: 0.5s;
     }
 
     body {
-        background-color: ${({theme}) => theme.COLORS.SECONDARY};
+        background-image: ${({theme}) => theme.COLORS.GRADIENT};
         font-family: ${({theme}) => theme.FONT.PRIMARY};
     }
     
@@ -17,7 +18,7 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     main {
-        width: 80vw;
+        max-width: 70rem;
         min-height: 90vh;
         display: flex;
         margin: auto;

@@ -9,10 +9,7 @@ function Account() {
                 <img src={ banner } alt="Banner de filmes" />
             </picture>
             
-            
-            <Style.AccountContent>
-                <Outlet/>
-            </Style.AccountContent>
+            <Outlet/>
         </Style.Main>
     );
 }

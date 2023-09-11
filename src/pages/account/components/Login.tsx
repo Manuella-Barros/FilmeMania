@@ -1,9 +1,8 @@
 import { Link } from "react-router-dom";
-import Form from "../../../components/form/Form";
-import { InputFieldProps } from "../../../components/inputField/InputField";
+import Form, { InputInterface } from "../../../components/form/Form";
 import * as Style from "../Account.styles";
 
-const inputs: InputFieldProps[] = [
+const inputs: InputInterface[] = [
     {
         label: "Nome",
         type: "text", 
@@ -20,7 +19,8 @@ const inputs: InputFieldProps[] = [
 
 function Login() {
     return (
-        <>
+        <Style.AccountContent>
+
             <h1>FilmeMania</h1>
 
             <Form inputs={inputs} buttonContent={"Entrar"}/>
@@ -29,7 +29,7 @@ function Login() {
                 <p>Não possui conta?</p>
                 <Link to={"/account/signup"}>Cadastre-se</Link>
             </Style.OptionsContainer>
-        </>
+        </Style.AccountContent>
     );
 }
 

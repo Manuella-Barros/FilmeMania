@@ -1,7 +1,7 @@
 import { styled } from 'styled-components';
 
 export const Nav = styled.nav`
-    background-color: ${({theme}) => theme.COLORS.PRIMARY};
+    background-image: ${({theme}) => theme.COLORS.DARK_GRADIENT};
 
     section {
         width: 80vw;

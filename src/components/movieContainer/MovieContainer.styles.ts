@@ -2,22 +2,22 @@ import { styled } from "styled-components";
 
 export const Container = styled.section`
     min-width: 320px;
-    width: 31%;
+    width: 32rem;
     background-color: white;
     display: flex;
     flex-wrap: wrap;
     border-radius: 10px;
+    border: 2px solid white;
 
     section{
         width: 60%;
-        padding: 0.5rem;
+        padding: 1.5rem;
     }
 
     picture{
         width: 40%;
         img{
-            border-radius: 10px;
-            border-bottom-right-radius: 0px;
+            border-radius: 10px 0px 0px 10px;
             object-fit: cover;
             width: 100%;
             height: 100%;
@@ -29,10 +29,7 @@ export const MovieInfo = styled.div`
     text-align: center;
     h2, h3{
         color: ${({theme}) => theme.COLORS.PRIMARY};
-    }
-    
-    span{
-        color: ${({theme}) => theme.COLORS.STARS_COLOR};
+        padding-bottom: 0.5rem;
     }
 
     h3{

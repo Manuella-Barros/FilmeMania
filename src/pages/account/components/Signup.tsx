@@ -1,9 +1,8 @@
-import Form from "../../../components/form/Form";
+import Form, { InputInterface } from "../../../components/form/Form";
 import * as Style from "../Account.styles";
-import { InputFieldProps } from "../../../components/inputField/InputField";
 import { Link } from "react-router-dom";
 
-const inputs: InputFieldProps[] = [
+const inputs: InputInterface[] = [
     {
         label: "Nome",
         type: "text", 
@@ -18,19 +17,13 @@ const inputs: InputFieldProps[] = [
     },
     {
         label: "Generos Favoritos",
-        type: "radio", 
-        name: "favGender",
-        radioInfo: [
-            { value: "terror", label: "Terror", },
-            { value: "suspense", label: "Suspense", },
-            { value: "drama", label: "Drama", },
-        ],
+        id: "favGenre",
     },
 ]
 
 function Signup() {
     return (
-        <>
+        <Style.AccountContent>
             <h1>Cadastro</h1>
 
             <Form inputs={inputs} buttonContent={"Cadastrar"}/>
@@ -39,7 +32,7 @@ function Signup() {
                 <p>Já possui conta?</p>
                 <Link to={"/account/login"}>Entre</Link>
             </Style.OptionsContainer>
-        </>
+        </Style.AccountContent>
     );
 }
 

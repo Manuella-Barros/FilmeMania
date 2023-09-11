@@ -1,9 +1,11 @@
 import MovieContainer from "../../components/movieContainer/MovieContainer";
 import * as Style from "./Home.styles";
+import CommentContainer from "./components/CommentContainer";
 
 function Home() {
     return (
-        <main>
+        <Style.Main>
+            <CommentContainer/>
 
             <Style.AllMovies>
                 <MovieContainer/>
@@ -15,7 +17,7 @@ function Home() {
                 <MovieContainer/>
                 <MovieContainer/>
             </Style.AllMovies>
-        </main>
+        </Style.Main>
     );
 }
 

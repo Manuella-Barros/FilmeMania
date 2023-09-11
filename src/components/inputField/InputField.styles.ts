@@ -12,11 +12,24 @@ export const InputField = styled.div`
     }
 
     input,
-    input[type="radio"] + label{
+    div div #favGenre,
+    textarea {
         border: none;
         background-color: #EEEEEE;
         padding: 0.5rem;
         border-radius: 5px;
+
+        &:hover{
+            box-shadow: 0px 0px 5px ${({theme}) => theme.COLORS.PRIMARY};
+        }
+        &:focus{
+            box-shadow: 0px 0px 5px ${({theme}) => theme.COLORS.PRIMARY};
+            outline: 0;
+        }
+    }
+
+    textarea {
+        resize: none;
     }
 
     input[type="radio"] {
@@ -31,5 +44,18 @@ export const InputField = styled.div`
             display: flex;
             width: 30%;
         }
+    }
+
+    div {
+        margin-top: 0.5rem;
+
+        div{
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+
+    #comentario{
+        height: 100%;
     }
 `

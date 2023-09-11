@@ -1,5 +1,5 @@
-import { Star } from "@phosphor-icons/react";
 import * as Style from "./MovieContainer.styles";
+import RatingStars from "../ratingStars/RatingStars";
 
 function MovieContainer() {
     return (
@@ -10,15 +10,9 @@ function MovieContainer() {
 
             <section>
                 <Style.MovieInfo>
-                    <h2>O predestinado</h2>
-                    <span>
-                        <Star size={22} weight="fill"/>
-                        <Star size={22} weight="fill"/>
-                        <Star size={22} weight="fill"/>
-                        <Star size={22} />
-                        <Star size={22} />
-                    </span>
+                    <h2>O Homem aranha: de volta a home</h2>
                     <h3>Drama / Suspense</h3>
+                    <RatingStars/>
                 </Style.MovieInfo>
 
                 <Style.Comment>
