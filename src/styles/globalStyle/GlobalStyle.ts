@@ -22,7 +22,7 @@ export const GlobalStyle = createGlobalStyle`
         min-height: 90vh;
         display: flex;
         margin: auto;
-        margin-block: 5rem;
+        margin-block: 3rem;
     }
 
     a {
