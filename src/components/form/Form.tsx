@@ -1,7 +1,6 @@
 import Button from "../button/Button";
 import InputField from "../inputField/InputField";
 import * as Style from "./Form.styles";
-import SelectGenre from "../inputField/components/SelectGenre";
 
 export interface InputInterface {
     label: string,

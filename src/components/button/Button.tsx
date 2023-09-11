@@ -4,9 +4,9 @@ interface ButtonInterface extends React.ButtonHTMLAttributes<HTMLButtonElement> 
     children: React.ReactNode,
 }
 
-function Button({children}: ButtonInterface) {
+function Button({children, ...props}: ButtonInterface) {
     return (
-        <Style.Button>{children}</Style.Button>
+        <Style.Button {...props}>{children}</Style.Button>
     );
 }
 

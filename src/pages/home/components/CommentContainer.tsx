@@ -1,4 +1,4 @@
-import { MagnifyingGlass, Star } from "@phosphor-icons/react";
+import { MagnifyingGlass } from "@phosphor-icons/react";
 import InputField from "../../../components/inputField/InputField";
 import * as Style from "../Home.styles";
 import RatingStars from "../../../components/ratingStars/RatingStars";

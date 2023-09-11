@@ -1,5 +1,4 @@
 import { keyframes, styled } from "styled-components";
-import Keyframes from "styled-components/dist/models/Keyframes";
 
 export const Main = styled.main`
     background-color: white;
