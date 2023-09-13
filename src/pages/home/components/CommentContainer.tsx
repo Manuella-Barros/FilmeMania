@@ -3,10 +3,10 @@ import InputField from "../../../components/inputField/InputField";
 import * as Style from "../Home.styles";
 import RatingStars from "../../../components/ratingStars/RatingStars";
 import Button from "../../../components/button/Button";
-import { getMoviesByName } from "../../../fetch/API_TMDB";
+//import { getMoviesByName } from "../../../fetch/API_TMDB";
 
 function CommentContainer() {
-    getMoviesByName();
+    //getMoviesByName();
 
     return (
         <Style.CommentContainer>
@@ -33,7 +33,7 @@ function CommentContainer() {
 
                     <div>
                         <p>Avaliação</p>
-                        <RatingStars/>
+                        <RatingStars styleType={"selectedString"}/>
                     </div>
                 </Style.RatingContainer>
 

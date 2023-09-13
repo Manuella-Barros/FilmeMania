@@ -5,14 +5,14 @@ export const InputField = styled.div`
     flex-direction: column;
     padding-bottom: 1rem;
 
-    label, p{
+    label{
         padding-bottom: 8px;
         font-size: 1rem;
         font-family: ${({theme}) => theme.FONT.PRIMARY};
     }
 
     input,
-    div div #favGenre,
+    div div .favGenre,
     textarea {
         border: none;
         background-color: #EEEEEE;
@@ -58,4 +58,10 @@ export const InputField = styled.div`
     #comentario{
         height: 100%;
     }
+`
+
+export const Error = styled.p`
+    color: red;
+    font-size: 15px;
+    padding-block: 5px;
 `

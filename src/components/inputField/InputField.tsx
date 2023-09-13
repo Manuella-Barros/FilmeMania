@@ -1,13 +1,15 @@
 import { HTMLProps } from 'react';
 import * as Style from './InputField.styles';
 import SelectGenre from './components/SelectGenre';
+import { UseFormRegister, FieldValues } from "react-hook-form";
 
 export interface InputFieldProps extends HTMLProps<HTMLInputElement> {
     label: string,
+    register: UseFormRegister<FieldValues>,
+    errors: string | undefined,
 }
 
-function InputField({label, ...props}: InputFieldProps) {
-
+function InputField({label, register, errors, ...props}: InputFieldProps) {
     if(props.id == "comentario"){
         return(
             <Style.InputField>
@@ -21,18 +23,20 @@ function InputField({label, ...props}: InputFieldProps) {
                 <div>
                     <label htmlFor="favGenre">{label}</label>
                     <div>
-                        <SelectGenre/>
-                        <SelectGenre/>
-                        <SelectGenre/>
+                        <SelectGenre register={register} id={1}/>
+                        <SelectGenre register={register} id={2}/>
+                        <SelectGenre register={register} id={3}/>
                     </div>
+                    {errors && <p>{errors}</p>}
                 </div>     
             </Style.InputField>    
         )     
-    } else{
+    } else if(props.id){
         return (
             <Style.InputField>
                 <label htmlFor={props.id}>{label}</label>
-                <input {...props}/>
+                <input {...register(props.id)} {...props}/>
+                {errors && <Style.Error>{errors}</Style.Error>}
             </Style.InputField>    
         )   
     }
