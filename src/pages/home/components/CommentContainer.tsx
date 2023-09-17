@@ -3,10 +3,28 @@ import InputField from "../../../components/inputField/InputField";
 import * as Style from "../Home.styles";
 import RatingStars from "../../../components/ratingStars/RatingStars";
 import Button from "../../../components/button/Button";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 //import { getMoviesByName } from "../../../fetch/API_TMDB";
+
+const schema = z.object({
+    movieName: z.string().min(3, {message: "Minimo de 3 caracteres"}),
+    comment: z.string().min(3, {message: "Minimo de 3 caracteres"}),
+    stars: z.string(),
+})
+
+export type CommentContainerData = z.infer<typeof schema>;
 
 function CommentContainer() {
     //getMoviesByName();
+    const { register, handleSubmit, formState:{errors} } = useForm<CommentContainerData>({
+        resolver: zodResolver(schema),
+    });
+
+    function handleFormSubmit(data: CommentContainerData){
+        console.log(data);
+    }
 
     return (
         <Style.CommentContainer>
@@ -14,13 +32,15 @@ function CommentContainer() {
                 <img src="./images/accountBanner.jpg" alt="" />
             </picture>
 
-            <Style.CommentForm>
+            <Style.CommentForm onSubmit={handleSubmit(handleFormSubmit)}>
                 <Style.RatingContainer>
                     <div>
-                        <InputField
+                        <InputField <CommentContainerData>
                             label="Nome do filme"
-                            id="nomeFilme"
+                            id="movieName"
                             placeholder="Insira o nome do filme"
+                            register={register}
+                            errors={errors?.movieName?.message}
                         />
                         <MagnifyingGlass size={20} />
 
@@ -33,17 +53,23 @@ function CommentContainer() {
 
                     <div>
                         <p>Avaliação</p>
-                        <RatingStars styleType={"selectedString"}/>
+                        <RatingStars 
+                            styleType={"selectedString"}
+                            id={"stars"}
+                            register={register}
+                        />
                     </div>
                 </Style.RatingContainer>
 
                 <section>
-                    <InputField
+                    <InputField <CommentContainerData>
                         label="Comentário"
-                        id="comentario"
-                    />  
+                        id="comment"
+                        register={register}
+                        errors={errors?.comment?.message}
+                    /> 
                     <div>
-                        <Button>Postar</Button>
+                        <Button type="submit">Postar</Button>
                     </div>
                 </section>
             </Style.CommentForm>

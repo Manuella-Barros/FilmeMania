@@ -1,8 +1,14 @@
-import { UseFormRegister, FieldValues } from "react-hook-form";
+import { UseFormRegister } from "react-hook-form";
+import { FieldValues, Path } from "react-hook-form";
 
-function SelectGenre({register, id}:{register: UseFormRegister<FieldValues>, id: number}) {
+interface SelectGenreProps<T extends FieldValues> {
+    register: UseFormRegister<T>, 
+    id: number
+}
+
+function SelectGenre<T extends FieldValues> ({register, id}: SelectGenreProps<T>) {
     return (
-        <select className="favGenre" {...register(`favGenre${id}`)}>
+        <select className="favGenre" {...register(`favGenre${id}` as Path<T>)}>
             <option value=""> Selecionar </option>
             <option value="terror"> Terror </option>
             <option value="acao"> Ação </option>

@@ -1,18 +1,21 @@
 import { Star } from "@phosphor-icons/react";
 import * as Style from "./RatingStars.styles";
-import { useState } from "react";
+import React, { useState } from "react";
+import { CommentContainerData } from "../../pages/home/components/CommentContainer";
+import { UseFormRegister } from "react-hook-form"
 
 interface RatingStars {
     styleType?: "selectedString",
+    id: string,
+    register: UseFormRegister<CommentContainerData>,
 }
 
-function RatingStars({styleType}: RatingStars) {
+function RatingStars({styleType, register, id}: RatingStars) {
     const [rating, setRating] = useState(1);
-
 
     return styleType == "selectedString" 
     ? 
-        <Style.Container>
+        <Style.Container {...register(id as keyof CommentContainerData)}>
             <Star onClick={() => setRating(1)} size={22} weight={rating >= 1 ? "fill" : undefined}/>
             <Star onClick={() => setRating(2)} size={22} weight={rating >= 2 ? "fill" : undefined}/>
             <Star onClick={() => setRating(3)} size={22} weight={rating >= 3 ? "fill" : undefined}/>

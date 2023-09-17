@@ -2,6 +2,10 @@ import { Link } from "react-router-dom";
 import Form, { InputInterface } from "../../../components/form/Form";
 import * as Style from "../Account.styles";
 import {z} from "zod";
+import { loginUser } from "../../../db/supabaseActions";
+import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { GlobalContext } from "../../../context/GlobalContext";
 
 const inputs: InputInterface[] = [
     {
@@ -30,8 +34,16 @@ const schema = z.object({
 export type LoginData = z.infer<typeof schema>;
 
 function Login() {
+    const navigate = useNavigate();
+    const { handleSetLoggedUser } = useContext(GlobalContext);
+
     function handleFormSubmit(data: LoginData){
-        console.log(data);
+        loginUser(data).then((userInfo) => {
+            if(userInfo){
+                handleSetLoggedUser(userInfo)
+                navigate("/")
+            }
+        });
     }
 
     return (

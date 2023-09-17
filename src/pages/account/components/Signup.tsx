@@ -1,4 +1,5 @@
 import Form, { InputInterface } from "../../../components/form/Form";
+import { createUser } from "../../../db/supabaseActions";
 import * as Style from "../Account.styles";
 import { Link } from "react-router-dom";
 import {z} from "zod";
@@ -34,13 +35,12 @@ const schema = z.object({
     favGenre3: z.string().refine(value => value != "", {message: "Escolher uma opção"}),
 })
 
-type SignupData = z.infer<typeof schema>;
+export type SignupData = z.infer<typeof schema>;
 
 function Signup() {
 
     function handleFormSubmit(data: SignupData){
-        console.log(data);
-        console.log('a')
+        createUser(data)
     }
 
     return (
@@ -52,7 +52,7 @@ function Signup() {
                 handleFormSubmit={handleFormSubmit} 
                 buttonContent={"Cadastrar"}
                 schema={schema}
-            />
+            /> 
 
             <Style.OptionsContainer>
                 <p>Já possui conta?</p>

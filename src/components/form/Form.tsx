@@ -1,4 +1,5 @@
-import { useForm } from "react-hook-form";
+
+import { useForm, FieldValues, Path } from "react-hook-form";
 import Button from "../button/Button";
 import InputField from "../inputField/InputField";
 import * as Style from "./Form.styles";
@@ -12,15 +13,15 @@ export interface InputInterface {
     placeholder?: string,
 }
 
-interface FormProps<T> {
+interface FormProps<T extends FieldValues> {
     buttonContent: string,
     inputs: InputInterface[],
-    handleFormSubmit: () => void,
+    handleFormSubmit: (data: T) => void,
     schema: z.ZodSchema<T>;
 }
 
-function Form<T>({buttonContent, inputs, handleFormSubmit, schema}: FormProps<T>) {
-    const { handleSubmit, register, formState:{errors}} = useForm({
+function Form<T extends FieldValues>({buttonContent, inputs, handleFormSubmit, schema}: FormProps<T>) {
+    const { handleSubmit, register, formState:{errors}} = useForm<T>({
         resolver: zodResolver(schema)
     });
 
@@ -28,14 +29,14 @@ function Form<T>({buttonContent, inputs, handleFormSubmit, schema}: FormProps<T>
         <Style.Form onSubmit={handleSubmit(handleFormSubmit)}>
             {
                 inputs.map((input: InputInterface, i) => {
-                    return <InputField
+                    return <InputField <T>
                             key={i}
                             label={input.label} 
                             type={input.type} 
                             id={input.id}
                             placeholder={input?.placeholder}
                             register={register}
-                            errors={ errors[input.id]?.message as string | undefined}
+                            errors={ errors[input.id as Path<T>]?.message as string | undefined}
                         />  
                 })
             }
