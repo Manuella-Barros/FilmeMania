@@ -85,7 +85,8 @@ export const SelectMovie = styled.section`
 
         option{
             padding: 1rem;
-            color: red;
+            color: black;
+            background-color: white;
         }
     }
 `

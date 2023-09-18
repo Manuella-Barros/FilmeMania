@@ -30,9 +30,18 @@ const schema = z.object({
         .regex(new RegExp(/(?=.*[a-z])/), "deve conter ao menos uma letra minúscula")
         .regex(new RegExp(/(?=.*[A-Z])/), "deve conter ao menos uma letra maiúscula")
         .regex(new RegExp(/(?=.*[$*&@#])/), "deve conter ao menos um caractere especial"),
-    favGenre1: z.string().refine(value => value != "", {message: "Escolher uma opção"}),
-    favGenre2: z.string().refine(value => value != "", {message: "Escolher uma opção"}),
-    favGenre3: z.string().refine(value => value != "", {message: "Escolher uma opção"}),
+    favGenre1: z.string(),
+    favGenre2: z.string(),
+    favGenre3: z.string(),
+
+}).refine((values) => values.favGenre1 != "" && values.favGenre2 != "" && values.favGenre3 != "", {
+    path: ["favGenre1"],
+    message: "Escolher as três opções"
+
+}).refine((values) => values.favGenre1 != values.favGenre2 && values.favGenre1 != values.favGenre3 && values.favGenre2 != values.favGenre3, {
+    path: ["favGenre1"],
+    message: "Os generos devem ser diferentes",
+
 })
 
 export type SignupData = z.infer<typeof schema>;

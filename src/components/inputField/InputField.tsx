@@ -2,12 +2,13 @@ import { HTMLProps } from 'react';
 import * as Style from './InputField.styles';
 import SelectGenre from './components/SelectGenre';
 import { UseFormRegister } from "react-hook-form";
-import { FieldValues, Path } from "react-hook-form";
+import { FieldValues, Path, FieldErrors } from "react-hook-form";
+import { Error } from '../../styles/globalStyle/GlobalStyle';
 
 export interface InputFieldProps<T extends FieldValues> extends HTMLProps<HTMLInputElement> {
     label: string,
     register: UseFormRegister<T>,
-    errors: string | undefined,
+    errors: FieldErrors<T>,
 }
 
 function InputField<T extends FieldValues>({label, register, errors, ...props}: InputFieldProps<T>) {
@@ -28,7 +29,7 @@ function InputField<T extends FieldValues>({label, register, errors, ...props}: 
                         <SelectGenre <T> register={register} id={2}/>
                         <SelectGenre <T> register={register} id={3}/> 
                     </div>
-                    {errors && <p>{errors}</p>}
+                    {errors.favGenre1 && <Error>{errors.favGenre1?.message as string}</Error>}
                 </div>
             </Style.InputField>
         )     
@@ -37,7 +38,7 @@ function InputField<T extends FieldValues>({label, register, errors, ...props}: 
             <Style.InputField>
                 <label htmlFor={props.id}>{label}</label>
                 <input {...register(props.id as Path<T>)} {...props}/>
-                {errors && <Style.Error>{errors}</Style.Error>}
+                {errors && <Error>{errors[props.id as Path<T>]?.message  as string}</Error>}
             </Style.InputField>    
         )   
     }

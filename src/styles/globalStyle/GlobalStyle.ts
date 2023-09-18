@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
     * {
@@ -29,4 +29,10 @@ export const GlobalStyle = createGlobalStyle`
         text-decoration: none;
         font-size: 1.5rem;
     }
+`
+
+export const Error = styled.p`
+    color: red;
+    font-size: 15px;
+    padding-block: 5px;
 `

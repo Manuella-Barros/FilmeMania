@@ -11,25 +11,28 @@ interface RatingStars {
 }
 
 function RatingStars({styleType, register, id}: RatingStars) {
-    const [rating, setRating] = useState(1);
+    const [rating, setRating] = useState<number>(1);
 
     return styleType == "selectedString" 
     ? 
-        <Style.Container {...register(id as keyof CommentContainerData)}>
-            <Star onClick={() => setRating(1)} size={22} weight={rating >= 1 ? "fill" : undefined}/>
-            <Star onClick={() => setRating(2)} size={22} weight={rating >= 2 ? "fill" : undefined}/>
-            <Star onClick={() => setRating(3)} size={22} weight={rating >= 3 ? "fill" : undefined}/>
-            <Star onClick={() => setRating(4)} size={22} weight={rating >= 4 ? "fill" : undefined}/>
-            <Star onClick={() => setRating(5)} size={22} weight={rating == 5 ? "fill" : undefined}/>
-        </Style.Container>
+        <>
+            <Style.ContainerSelectedStar htmlFor="stars">
+                <Star onClick={() => setRating(1)} size={22} weight={rating >= 1 ? "fill" : undefined}/>
+                <Star onClick={() => setRating(2)} size={22} weight={rating >= 2 ? "fill" : undefined}/>
+                <Star onClick={() => setRating(3)} size={22} weight={rating >= 3 ? "fill" : undefined}/>
+                <Star onClick={() => setRating(4)} size={22} weight={rating >= 4 ? "fill" : undefined}/>
+                <Star onClick={() => setRating(5)} size={22} weight={rating == 5 ? "fill" : undefined}/>
+            </Style.ContainerSelectedStar>
+            <input type="radio" value={rating} id="stars" {...register(id as keyof CommentContainerData)}/>
+        </>    
     : 
-        <Style.Container>
+        <Style.ContainerStar>
             <Star size={22}/>
             <Star size={22}/>
             <Star size={22}/>
             <Star size={22}/>
             <Star size={22}/>
-        </Style.Container>
+        </Style.ContainerStar>
 }
 
 export default RatingStars;

@@ -4,8 +4,9 @@ import * as Style from "../Account.styles";
 import {z} from "zod";
 import { loginUser } from "../../../db/supabaseActions";
 import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { GlobalContext } from "../../../context/GlobalContext";
+import { Error } from "../../../styles/globalStyle/GlobalStyle";
 
 const inputs: InputInterface[] = [
     {
@@ -36,31 +37,44 @@ export type LoginData = z.infer<typeof schema>;
 function Login() {
     const navigate = useNavigate();
     const { handleSetLoggedUser } = useContext(GlobalContext);
+    const [ error, setError ] = useState<string | null>(null);
 
     function handleFormSubmit(data: LoginData){
         loginUser(data).then((userInfo) => {
             if(userInfo){
                 handleSetLoggedUser(userInfo)
                 navigate("/")
+            } else{
+                setError("Usuário ou senha inválidos");
             }
         });
+    }
+
+    function handleFormChange() {
+        setError(null);
     }
 
     return (
         <Style.AccountContent>
 
-            <h1>FilmeMania</h1>
-            <Form <LoginData>
-                inputs={inputs} 
-                buttonContent={"Entrar"}
-                handleFormSubmit={handleFormSubmit} 
-                schema={schema}
-            />
+            <>
+                <h1>FilmeMania</h1>
+                <Form <LoginData>
+                    onChange={handleFormChange}
+                    inputs={inputs} 
+                    buttonContent={"Entrar"}
+                    handleFormSubmit={handleFormSubmit} 
+                    schema={schema}
+                />
 
-            <Style.OptionsContainer>
-                <p>Não possui conta?</p>
-                <Link to={"/account/signup"}>Cadastre-se</Link>
-            </Style.OptionsContainer>
+                <Style.OptionsContainer>
+                    <p>Não possui conta?</p>
+                    <Link to={"/account/signup"}>Cadastre-se</Link>
+                </Style.OptionsContainer>
+            </>
+            {
+                error && <Error>{error}</Error>
+            }
         </Style.AccountContent>
     );
 }

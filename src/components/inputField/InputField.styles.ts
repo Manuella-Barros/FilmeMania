@@ -59,9 +59,3 @@ export const InputField = styled.div`
         height: 100%;
     }
 `
-
-export const Error = styled.p`
-    color: red;
-    font-size: 15px;
-    padding-block: 5px;
-`

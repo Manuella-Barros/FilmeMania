@@ -25,7 +25,10 @@ function Profile() {
                 <Style.PainelModerador>
                     <h2>Painel do Moderador</h2>
 
-                    <InputField label="Pesquisar usuário" placeholder="Insira o nome do usuario"/>
+                    <InputField 
+                        label="Pesquisar usuário" 
+                        placeholder="Insira o nome do usuario"/>
+                        
                     <Button>Excluir</Button>
                     <Button>Limpar Postagens</Button>
                     <Button>Promover a MOD</Button>

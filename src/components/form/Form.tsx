@@ -17,16 +17,17 @@ interface FormProps<T extends FieldValues> {
     buttonContent: string,
     inputs: InputInterface[],
     handleFormSubmit: (data: T) => void,
-    schema: z.ZodSchema<T>;
+    schema: z.ZodSchema<T>,
+    onChange?: () => void,
 }
 
-function Form<T extends FieldValues>({buttonContent, inputs, handleFormSubmit, schema}: FormProps<T>) {
+function Form<T extends FieldValues>({buttonContent, inputs, handleFormSubmit, schema, onChange = undefined}: FormProps<T>) {
     const { handleSubmit, register, formState:{errors}} = useForm<T>({
         resolver: zodResolver(schema)
     });
 
     return (
-        <Style.Form onSubmit={handleSubmit(handleFormSubmit)}>
+        <Style.Form onSubmit={handleSubmit(handleFormSubmit)} onChange={onChange}>
             {
                 inputs.map((input: InputInterface, i) => {
                     return <InputField <T>
@@ -36,7 +37,8 @@ function Form<T extends FieldValues>({buttonContent, inputs, handleFormSubmit, s
                             id={input.id}
                             placeholder={input?.placeholder}
                             register={register}
-                            errors={ errors[input.id as Path<T>]?.message as string | undefined}
+                            errors={errors}
+                            // errors={ errors[input.id as Path<T>]?.message as string | undefined}
                         />  
                 })
             }
