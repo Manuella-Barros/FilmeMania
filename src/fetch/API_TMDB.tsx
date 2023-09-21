@@ -13,10 +13,18 @@ const options = {
     }
 };
 
-export async function getMoviesByName(movieName: string): Promise<IGetMoviesByName[]> {
+export async function getMoviesByName(movieName: string): Promise<IGetMoviesByNameReturn[]> {
     const request = await fetch(`${ApiUrl}/search/movie?query=${movieName}`, options)
         .then(res => res.json())
         .catch(err => console.error(err));
 
     return request.results;
+}
+
+export async function getMovieDetails(movieID: string): Promise<IGetMovieDetailsReturn>{
+    const request = await fetch(`${ApiUrl}/movie/${movieID}`, options)
+        .then(res => res.json())
+        .catch(err => console.log(err))
+
+    return request;
 }

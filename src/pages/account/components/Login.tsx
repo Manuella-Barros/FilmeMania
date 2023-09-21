@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import Form, { InputInterface } from "../../../components/form/Form";
 import * as Style from "../Account.styles";
 import {z} from "zod";
-import { loginUser } from "../../../db/supabaseActions";
+import { loginUser, selectGenreById } from "../../../db/supabaseActions";
 import { useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import { GlobalContext } from "../../../context/GlobalContext";
@@ -40,14 +40,18 @@ function Login() {
     const [ error, setError ] = useState<string | null>(null);
 
     function handleFormSubmit(data: LoginData){
-        loginUser(data).then((userInfo) => {
-            if(userInfo){
-                handleSetLoggedUser(userInfo)
-                navigate("/")
+        loginUser(data).then(res => {
+            if(res){
+                selectGenreById(res.id).then(generos => {
+                    if(generos){
+                        handleSetLoggedUser(res, generos)
+                        navigate("/")
+                    }
+                });
             } else{
                 setError("Usuário ou senha inválidos");
             }
-        });
+        })
     }
 
     function handleFormChange() {

@@ -1,10 +1,16 @@
 import { GlobalContext } from '../../context/GlobalContext';
 import * as Style from './Navbar.styles';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useContext } from "react";
 
 function Navbar() {
-    const { loggedUser } = useContext(GlobalContext);
+    const { loggedUser, handleLogoutUser } = useContext(GlobalContext);
+    const navigate = useNavigate();
+    
+    function handleLogout(){
+        handleLogoutUser();
+        navigate("account/login")
+    }
 
     return (
         <Style.Nav>
@@ -16,7 +22,11 @@ function Navbar() {
                         <Link to={'/'}>Home</Link>
                         {
                             loggedUser != null
-                            ? <Link to={'profile'}>Perfil</Link>
+                            ? 
+                                <>
+                                    <Link to={'profile'} >Perfil</Link>
+                                    <button onClick={handleLogout}>Sair</button>
+                                </>
                             : <Link to={'account/login'}>Logar/ Cadastrar</Link>
                         }
                     </div>

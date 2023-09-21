@@ -7,15 +7,16 @@ import { GlobalContext } from "../../context/GlobalContext";
 
 function Profile() {
     const { loggedUser } = useContext(GlobalContext);
+
     return (
         <Style.Main>
             <Style.Profile>
                 <h1>{loggedUser?.username}</h1>
 
                 <Style.FavGenres>
-                    <p>{loggedUser?.fav_gen_1}</p>
-                    <p>{loggedUser?.fav_gen_2}</p>
-                    <p>{loggedUser?.fav_gen_3}</p>
+                    {
+                        loggedUser?.favGenres.map(genre => <p>{genre.genres.name}</p>)
+                    }
                 </Style.FavGenres>
                 
                 <Style.ButtonContainer>

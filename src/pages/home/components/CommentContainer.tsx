@@ -7,8 +7,10 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { getMoviesByName } from "../../../fetch/API_TMDB";
-import { useState } from "react";
+import { useState, useContext, useEffect, SetStateAction, Dispatch } from "react";
 import { Error } from "../../../styles/globalStyle/GlobalStyle";
+import { GlobalContext } from "../../../context/GlobalContext";
+import { insertPost } from "../../../db/supabaseActions";
 
 const schema = z.object({
     movieName: z.string().min(3, {message: "Minimo de 3 caracteres"}),
@@ -19,17 +21,23 @@ const schema = z.object({
 
 export type CommentContainerData = z.infer<typeof schema>;
 
-function CommentContainer() {
+interface ICommentContainerProps {
+    SetIsNewPost: Dispatch<SetStateAction<boolean>>;
+}
+function CommentContainer({SetIsNewPost}: ICommentContainerProps) {
     const { register, handleSubmit, formState:{errors}, watch } = useForm<CommentContainerData>({
         resolver: zodResolver(schema),
     });
+    const { loggedUser } = useContext(GlobalContext);
     
-    const [ searchedMovies, setSearchedMovies ] = useState<IGetMoviesByName[] | null>(null);
+    const [ searchedMovies, setSearchedMovies ] = useState<IGetMoviesByNameReturn[] | null>(null);
     const [ movieImage, setMovieImage ] = useState<string | null>(null);
 
     function handleFormSubmit(data: CommentContainerData){
-        console.log(data);
-        getMoviesByName(data.movieSelected).then(res => setMovieImage(res[0].backdrop_path))
+        if(loggedUser){
+            insertPost(data, loggedUser?.user_id);
+            SetIsNewPost(true)
+        }
     }
 
     function handleKeyDown(e: React.KeyboardEvent){
@@ -37,6 +45,12 @@ function CommentContainer() {
             getMoviesByName(watch("movieName")).then(res => setSearchedMovies(res));
         }
     }
+
+    useEffect(() => {
+        if(watch("movieSelected")){
+            getMoviesByName(watch("movieSelected")).then(res => setMovieImage(res[0].backdrop_path))
+        }
+    }, [watch("movieSelected")])
 
     return (
         <Style.CommentContainer>

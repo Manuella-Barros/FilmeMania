@@ -36,6 +36,14 @@ export const MovieInfo = styled.div`
         font-size: 1rem;
         font-weight: 400;
     }
+    
+    div{
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+        column-gap: 10px;
+        flex-wrap: wrap;
+    }
 `
 
 export const Comment = styled.div`
@@ -51,7 +59,19 @@ export const UserInfo = styled.div`
     }
 
     span{
-        font-size: 0.75rem;
+        font-size: 0.85rem;
         opacity: 0.7;
+
+        &:not(:first-child):before{
+            content: " - ";
+            position: relative;
+            right: 5px;
+        }
+    }
+
+    div{
+        display: flex;
+        gap: 10px;
+
     }
 `

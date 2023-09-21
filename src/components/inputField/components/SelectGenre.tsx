@@ -1,5 +1,8 @@
+import { useEffect, useState } from "react";
 import { UseFormRegister } from "react-hook-form";
 import { FieldValues, Path } from "react-hook-form";
+import { selectGenres } from "../../../db/supabaseActions";
+import { SelectGenresReturn } from "../../../db/supabaseActionsInterface";
 
 interface SelectGenreProps<T extends FieldValues> {
     register: UseFormRegister<T>, 
@@ -7,18 +10,29 @@ interface SelectGenreProps<T extends FieldValues> {
 }
 
 function SelectGenre<T extends FieldValues> ({register, id}: SelectGenreProps<T>) {
-    return (
-        <select className="favGenre" {...register(`favGenre${id}` as Path<T>)}>
-            <option value=""> Selecionar </option>
-            <option value="terror"> Terror </option>
-            <option value="acao"> Ação </option>
-            <option value="suspense"> Suspense </option>
-            <option value="drama"> Drama </option>
-            <option value="comedia"> Comédia </option>
-            <option value="romance"> Romance </option>
-            <option value="infantil"> Infantil </option>
-        </select>
-    );
+    const [ allGenres, setAllGenres ] = useState<SelectGenresReturn[] | null>(null);
+
+    useEffect(() => {
+        selectGenres().then(res => {
+            if(res){
+                setAllGenres(res)
+            }
+        });
+    }, [])
+
+
+    if(allGenres){
+        return (
+            <select className="favGenre" {...register(`favGenre${id}` as Path<T>)}>
+                {
+                    allGenres.map((genre, i) => {
+                        return <option key={i} value={genre.name}> {genre.name} </option>
+                    })
+                }
+            </select>
+        );
+    }
+    
 }
 
 export default SelectGenre;

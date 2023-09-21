@@ -1,8 +1,10 @@
+import { useState } from "react";
 import Form, { InputInterface } from "../../../components/form/Form";
-import { createUser } from "../../../db/supabaseActions";
+import { createUser, insertUserFavGenres } from "../../../db/supabaseActions";
 import * as Style from "../Account.styles";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {z} from "zod";
+import { Error } from "../../../styles/globalStyle/GlobalStyle";
 
 const inputs: InputInterface[] = [
     {
@@ -41,16 +43,28 @@ const schema = z.object({
 }).refine((values) => values.favGenre1 != values.favGenre2 && values.favGenre1 != values.favGenre3 && values.favGenre2 != values.favGenre3, {
     path: ["favGenre1"],
     message: "Os generos devem ser diferentes",
-
 })
 
 export type SignupData = z.infer<typeof schema>;
 
 function Signup() {
+    const [ error, setError ] = useState<string | null>(null);
+    const navigate = useNavigate();
 
     function handleFormSubmit(data: SignupData){
-        createUser(data)
+        createUser(data.name, data.password)
+            .then(userId => {
+                if(userId){
+                    insertUserFavGenres(userId[0].id, data.favGenre1);
+                    insertUserFavGenres(userId[0].id, data.favGenre2);
+                    insertUserFavGenres(userId[0].id, data.favGenre3);
+                }
+
+                navigate("/");
+            }).catch((res) => setError(res.message));
     }
+
+    console.log(error)
 
     return (
         <Style.AccountContent>
@@ -67,6 +81,9 @@ function Signup() {
                 <p>Já possui conta?</p>
                 <Link to={"/account/login"}>Entre</Link>
             </Style.OptionsContainer>
+            {
+                error && <Error>{error}</Error>
+            }
         </Style.AccountContent>
     );
 }

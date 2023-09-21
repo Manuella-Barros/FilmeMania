@@ -24,6 +24,15 @@ export const Nav = styled.nav`
                 padding-inline: 1rem;
                 color: white;
             }
+            button{
+                background-color: transparent;
+                border: none;
+                padding-inline: 1rem;
+                color: white;
+                font-size: 1.5rem;
+                display: flex;
+                align-items: center;
+            }
         }
     }
 `

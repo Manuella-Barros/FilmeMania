@@ -1,17 +1,16 @@
 import React, { useState } from "react";
-import { LoginUserReturn } from "../db/supabaseActions";
+import { IUserFavGenres, LoginUserReturn } from "../db/supabaseActionsInterface";
 
-interface GlobalContextProps {
+export interface GlobalContextProps {
     loggedUser: ILoggedUser | null,
-    handleSetLoggedUser: (a: LoginUserReturn) => void,
+    handleSetLoggedUser: (a: LoginUserReturn, b: IUserFavGenres[]) => void,
+    handleLogoutUser: () => void,
 }
 
-interface ILoggedUser {
+export interface ILoggedUser {
     user_id: string,
     username: string,
-    fav_gen_1: string,
-    fav_gen_2: string,
-    fav_gen_3: string,
+    favGenres: IUserFavGenres[],
 }
 
 export const GlobalContext = React.createContext({} as GlobalContextProps);
@@ -19,17 +18,19 @@ export const GlobalContext = React.createContext({} as GlobalContextProps);
 export function GlobalProvider ({children}: {children: React.ReactNode}) {
     const [ loggedUser, setLoggedUser ] = useState< ILoggedUser | null>(null);
 
-    function handleSetLoggedUser(userInfo: LoginUserReturn){
+    function handleSetLoggedUser(userInfo: LoginUserReturn, userFavGenres: IUserFavGenres[]){
         setLoggedUser({
-            user_id: userInfo.user_id,
+            user_id: userInfo.id,
             username: userInfo.username,
-            fav_gen_1: userInfo.fav_gen_1,
-            fav_gen_2: userInfo.fav_gen_2,
-            fav_gen_3: userInfo.fav_gen_3,
+            favGenres: userFavGenres,
         })
     }
-
+    
+    function handleLogoutUser(){
+        setLoggedUser(null);
+    }
+    
     return(
-        <GlobalContext.Provider value={{ loggedUser, handleSetLoggedUser }}>{children}</GlobalContext.Provider>
+        <GlobalContext.Provider value={{ loggedUser, handleSetLoggedUser, handleLogoutUser }}>{children}</GlobalContext.Provider>
     )
 }
