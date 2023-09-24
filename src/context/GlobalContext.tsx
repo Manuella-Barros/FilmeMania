@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IUserFavGenres, LoginUserReturn } from "../db/supabaseActionsInterface";
 
 export interface GlobalContextProps {
@@ -23,8 +23,21 @@ export function GlobalProvider ({children}: {children: React.ReactNode}) {
             user_id: userInfo.id,
             username: userInfo.username,
             favGenres: userFavGenres,
-        })
+        }) 
     }
+
+    useEffect(() => {
+        const userInfo = localStorage.getItem("loggedUserInfo");
+        if(userInfo){
+            setLoggedUser(JSON.parse(userInfo))
+        }
+    }, [])
+
+    useEffect(() => {
+        if(loggedUser){
+            localStorage.setItem("loggedUserInfo", JSON.stringify(loggedUser))
+        }
+    }, [loggedUser])
     
     function handleLogoutUser(){
         setLoggedUser(null);

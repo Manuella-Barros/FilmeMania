@@ -25,8 +25,14 @@ interface ICommentContainerProps {
     SetIsNewPost: Dispatch<SetStateAction<boolean>>;
 }
 function CommentContainer({SetIsNewPost}: ICommentContainerProps) {
-    const { register, handleSubmit, formState:{errors}, watch } = useForm<CommentContainerData>({
+    const { register, handleSubmit, formState:{errors}, watch, reset } = useForm<CommentContainerData>({
         resolver: zodResolver(schema),
+        defaultValues:{
+            movieName: "",
+            comment: "",
+            stars: "1",
+            movieSelected: "",
+        }
     });
     const { loggedUser } = useContext(GlobalContext);
     
@@ -37,6 +43,8 @@ function CommentContainer({SetIsNewPost}: ICommentContainerProps) {
         if(loggedUser){
             insertPost(data, loggedUser?.user_id);
             SetIsNewPost(true)
+            reset();
+            setMovieImage(null)
         }
     }
 

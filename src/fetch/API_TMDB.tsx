@@ -14,7 +14,7 @@ const options = {
 };
 
 export async function getMoviesByName(movieName: string): Promise<IGetMoviesByNameReturn[]> {
-    const request = await fetch(`${ApiUrl}/search/movie?query=${movieName}`, options)
+    const request = await fetch(`${ApiUrl}/search/movie?language=pt-Br&query=${movieName}`, options)
         .then(res => res.json())
         .catch(err => console.error(err));
 
@@ -22,9 +22,9 @@ export async function getMoviesByName(movieName: string): Promise<IGetMoviesByNa
 }
 
 export async function getMovieDetails(movieID: string): Promise<IGetMovieDetailsReturn>{
-    const request = await fetch(`${ApiUrl}/movie/${movieID}`, options)
+    const request = await fetch(`${ApiUrl}/movie/${movieID}?language=pt-Br`, options)
         .then(res => res.json())
         .catch(err => console.log(err))
-
+        
     return request;
 }

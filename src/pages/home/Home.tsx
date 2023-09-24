@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import MovieContainer from "../../components/movieContainer/MovieContainer";
 import { selectAllPosts } from "../../db/supabaseActions";
 import * as Style from "./Home.styles";
-import CommentContainer, { CommentContainerData } from "./components/CommentContainer";
+import CommentContainer from "./components/CommentContainer";
+import { GlobalContext } from "../../context/GlobalContext";
 
-interface IMovie {
+export interface IMovie {
     comment: string,
     created_at: string,
     fk_user_id: string,
@@ -15,27 +16,33 @@ interface IMovie {
 
 function Home() {
     const [ movies, setmovies ] = useState<IMovie[] | null>(null);
-    const [ isNewPost, SetIsNewPost ] = useState<boolean>(false);
+    const [ isNewPost, SetIsNewPost ] = useState<boolean>(true);
+    const {loggedUser} = useContext(GlobalContext)
 
     useEffect(() => {
-        selectAllPosts().then(res => {
-            console.log(res)
-            if(res){
-                setmovies(res);
-                SetIsNewPost(false)
-            }
-        });
+        if(isNewPost){
+            selectAllPosts().then(res => {
+                if(res){
+                    setmovies(res); 
+                    SetIsNewPost(false)
+                }
+            });
+        }
     }, [isNewPost])
+
+    if(!movies){
+        return null
+    }
 
     return (
         <Style.Main>
-            <CommentContainer SetIsNewPost={SetIsNewPost}/>
+            {loggedUser && <CommentContainer SetIsNewPost={SetIsNewPost}/> }
 
             <Style.AllMovies>
                 {
-                    movies?.map(movie => {
+                    movies.map(movie => {
                         return <MovieContainer
-                            key={movie.fk_user_id}
+                            key={movie.id}
                             comment={movie.comment}
                             userID={movie.fk_user_id}
                             movieID={movie.movie_id}
@@ -43,7 +50,6 @@ function Home() {
                         />
                     }).reverse()
                 }
-
             </Style.AllMovies>
         </Style.Main>
     );

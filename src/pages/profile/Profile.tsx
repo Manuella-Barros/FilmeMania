@@ -1,12 +1,29 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState, useRef } from "react";
 import Button from "../../components/button/Button";
-import InputField from "../../components/inputField/InputField";
 import MovieContainer from "../../components/movieContainer/MovieContainer";
 import * as Style from "./Profile.styles";
 import { GlobalContext } from "../../context/GlobalContext";
+import { selectAllPosts } from "../../db/supabaseActions";
+import { IMovie } from "../home/Home";
+import { InputField } from "../../components/inputField/InputField.styles";
 
 function Profile() {
     const { loggedUser } = useContext(GlobalContext);
+    const [ posts, setPosts ] = useState<IMovie[] | null>(null);
+    const searchMovies = useRef(null);
+
+    useEffect(() => {
+        selectAllPosts().then(res => {
+            if(res){
+                setPosts(res); 
+            }
+        });
+    }, [])
+
+    function handlePesquisarFilme(){
+        console.log(searchMovies?.current?.value);
+    }
+
 
     return (
         <Style.Main>
@@ -24,23 +41,32 @@ function Profile() {
                 </Style.ButtonContainer>
 
                 <Style.PainelModerador>
-                    <h2>Painel do Moderador</h2>
+                    <h2>Pesquisar Filme</h2>
 
-                    <InputField 
-                        label="Pesquisar usuário" 
-                        placeholder="Insira o nome do usuario"/>
-                        
-                    <Button>Excluir</Button>
-                    <Button>Limpar Postagens</Button>
-                    <Button>Promover a MOD</Button>
+                    <InputField>
+                        <input ref={searchMovies} type="text" placeholder="Digite o nome do filme" />
+                    </InputField>
+                    <Button onClick={handlePesquisarFilme}>Pesquisar</Button>
+                    <Button>Limpar filtro</Button>
                 </Style.PainelModerador>
             </Style.Profile>
 
             <Style.Movies>
                 <h1>Suas postagens</h1>
-                <MovieContainer/>
-                <MovieContainer/>
-                <MovieContainer/>
+                {
+                    posts && posts?.map(post => {
+                        if(post.fk_user_id == loggedUser?.user_id){
+                            return <MovieContainer 
+                                key={post.id}
+                                comment={post.comment}
+                                movieID={post.movie_id}
+                                rating={post.rating}
+                                userID={post.fk_user_id}
+                            />
+                        }
+                    }).reverse()
+                }
+
             </Style.Movies>
         </Style.Main>
     );

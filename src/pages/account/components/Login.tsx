@@ -26,10 +26,10 @@ const inputs: InputInterface[] = [
 const schema = z.object({
     name: z.string().min(3, {message: "Minimo de 3 caracteres"}),
     password: z.string().nonempty("Campo obrigatório")
-        .regex(new RegExp(/(?=.*\d)/), "deve conter ao menos um dígito")
-        .regex(new RegExp(/(?=.*[a-z])/), "deve conter ao menos uma letra minúscula")
-        .regex(new RegExp(/(?=.*[A-Z])/), "deve conter ao menos uma letra maiúscula")
-        .regex(new RegExp(/(?=.*[$*&@#])/), "deve conter ao menos um caractere especial")
+        // .regex(new RegExp(/(?=.*\d)/), "deve conter ao menos um dígito")
+        // .regex(new RegExp(/(?=.*[a-z])/), "deve conter ao menos uma letra minúscula")
+        // .regex(new RegExp(/(?=.*[A-Z])/), "deve conter ao menos uma letra maiúscula")
+        // .regex(new RegExp(/(?=.*[$*&@#])/), "deve conter ao menos um caractere especial")
 })
 
 export type LoginData = z.infer<typeof schema>;

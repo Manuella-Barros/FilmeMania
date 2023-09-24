@@ -34,7 +34,7 @@ function MovieContainer(data: IMovieCOntainer) {
 
             <section>
                 <Style.MovieInfo>
-                    <h2>{movieData.original_title}</h2>
+                    <h2>{movieData.title}</h2>
                     <div>
                         {
                             movieData.genres.map(genre => {

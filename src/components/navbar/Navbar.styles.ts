@@ -18,7 +18,14 @@ export const Nav = styled.nav`
 
         div {
             display: flex;
-            align-items: center;
+            align-items: center; 
+
+            a, button{
+                padding: 0;
+                margin: 0;
+                box-sizing: border-box;
+                /* line-height: 3rem; é isso mesmo, a formatação do link */
+            }
 
             a {
                 padding-inline: 1rem;
