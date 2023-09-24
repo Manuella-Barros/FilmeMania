@@ -56,7 +56,7 @@ function CommentContainer({SetIsNewPost}: ICommentContainerProps) {
 
     useEffect(() => {
         if(watch("movieSelected")){
-            getMoviesByName(watch("movieSelected")).then(res => setMovieImage(res[0].backdrop_path))
+            getMoviesByName(watch("movieSelected")).then(res => setMovieImage(res[0].poster_path))
         }
     }, [watch("movieSelected")])
 

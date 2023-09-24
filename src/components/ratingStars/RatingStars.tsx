@@ -1,6 +1,6 @@
 import { Star } from "@phosphor-icons/react";
 import * as Style from "./RatingStars.styles";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { CommentContainerData } from "../../pages/home/components/CommentContainer";
 import { UseFormRegister } from "react-hook-form"
 

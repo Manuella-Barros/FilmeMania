@@ -8,11 +8,19 @@ export interface LoginUserReturn{
 }
 
 export interface IUserFavGenres {
-    genres: {name: string[]},
+    genres: {
+        genres: {
+            name: string
+        }
+    }[]
 }
 
 export interface ISelectUserByIdReturn {
     id: string, 
     username: string,
-    genres: { genres: {name: string}[] } [];
+    genres: {
+        genres: {
+            name: string
+        }
+    }[]
 }

@@ -36,9 +36,9 @@ function Profile() {
                     }
                 </Style.FavGenres>
                 
-                <Style.ButtonContainer>
+                {/* <Style.ButtonContainer>
                     <Button color="white">Atualiza Perfil</Button>
-                </Style.ButtonContainer>
+                </Style.ButtonContainer> */}
 
                 <Style.PainelModerador>
                     <h2>Pesquisar Filme</h2>

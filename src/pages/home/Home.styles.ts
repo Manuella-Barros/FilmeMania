@@ -21,11 +21,12 @@ export const CommentContainer = styled.article`
     border: 2px solid white;
     gap: 2rem;
     min-height: 18rem;
+    height: 18rem;
     
     picture{
         width: 40%;
-
         img{
+            object-fit: cover;
             border-radius: 10px 0px 0px 10px;
             width: 100%;
             height: 100%;

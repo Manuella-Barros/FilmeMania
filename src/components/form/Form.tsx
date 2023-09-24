@@ -1,5 +1,5 @@
 
-import { useForm, FieldValues, Path } from "react-hook-form";
+import { useForm, FieldValues } from "react-hook-form";
 import Button from "../button/Button";
 import InputField from "../inputField/InputField";
 import * as Style from "./Form.styles";
@@ -38,7 +38,6 @@ function Form<T extends FieldValues>({buttonContent, inputs, handleFormSubmit, s
                             placeholder={input?.placeholder}
                             register={register}
                             errors={errors}
-                            // errors={ errors[input.id as Path<T>]?.message as string | undefined}
                         />  
                 })
             }
