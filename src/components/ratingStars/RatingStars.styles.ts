@@ -6,6 +6,10 @@ export const ContainerSelectedStar = styled.label`
     & + input{
         appearance: none;
     }
+
+    &:hover{
+        cursor: pointer;
+    }
 `
 export const ContainerStar = styled.span`
     color: ${({theme}) => theme.COLORS.STARS_COLOR};

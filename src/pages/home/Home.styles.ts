@@ -57,11 +57,37 @@ export const RatingContainer = styled.section`
 
     div{
         position: relative;
-        & + svg{
+
+        article{
+            top: 29px;
+            right: 0;
+            position: absolute;
+
+            button{
+                width: 40px;
+                height: 32px;
+                border: 0;
+                background: ${({theme}) => theme.COLORS.GRADIENT};
+                opacity: 0.8;
+                border-top-right-radius: 6px;
+                border-bottom-right-radius: 6px;
+
+                svg{
+                    color: white;
+                    font-weight: bolder;
+                }
+
+                &:hover{
+                    opacity: 1;
+                    cursor: pointer;
+                }
+            }
+        }
+        /* & + svg{
             position: absolute;
             top: 31%;
             right: 3%;
-        }
+        } */
     }
 `
 

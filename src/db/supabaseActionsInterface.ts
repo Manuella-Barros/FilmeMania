@@ -9,10 +9,8 @@ export interface LoginUserReturn{
 
 export interface IUserFavGenres {
     genres: {
-        genres: {
-            name: string
-        }
-    }[]
+        name: string
+    }
 }
 
 export interface ISelectUserByIdReturn {
@@ -22,5 +20,5 @@ export interface ISelectUserByIdReturn {
         genres: {
             name: string
         }
-    }[]
+    }[],
 }

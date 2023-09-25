@@ -13,8 +13,8 @@ import { GlobalContext } from "../../../context/GlobalContext";
 import { insertPost } from "../../../db/supabaseActions";
 
 const schema = z.object({
-    movieName: z.string().min(3, {message: "Minimo de 3 caracteres"}),
-    comment: z.string().min(3, {message: "Minimo de 3 caracteres"}),
+    movieName: z.string().nonempty("Pesquise por um filme"),
+    comment: z.string(),
     stars: z.string(),
     movieSelected: z.string().refine(value => value != "", {message: "Escolha um filme"}),
 })
@@ -41,16 +41,18 @@ function CommentContainer({SetIsNewPost}: ICommentContainerProps) {
 
     function handleFormSubmit(data: CommentContainerData){
         if(loggedUser){
-            insertPost(data, loggedUser?.user_id);
+            insertPost(data, loggedUser?.user_id, watch("movieName"));
             SetIsNewPost(true)
             reset();
             setMovieImage(null)
         }
+
+        setSearchedMovies(null);
     }
 
-    function handleKeyDown(e: React.KeyboardEvent){
-        if(e.key == "Enter" && watch("movieName").length >= 3){
-            getMoviesByName(watch("movieName")).then(res => setSearchedMovies(res));
+    function handleSearchMovie(){
+        if(watch("movieName") != ''){
+            getMoviesByName(watch("movieName")).then(res => setSearchedMovies(res))
         }
     }
 
@@ -72,7 +74,7 @@ function CommentContainer({SetIsNewPost}: ICommentContainerProps) {
                 
             </picture>
 
-            <Style.CommentForm onSubmit={handleSubmit(handleFormSubmit)} onKeyDown={handleKeyDown}>
+            <Style.CommentForm onSubmit={handleSubmit(handleFormSubmit)} /*onKeyDown={handleKeyDown}*/>
                 <Style.RatingContainer>
                     <div>
                         <InputField <CommentContainerData>
@@ -82,7 +84,11 @@ function CommentContainer({SetIsNewPost}: ICommentContainerProps) {
                             register={register}
                             errors={errors}
                         />
-                        <MagnifyingGlass size={20} />
+                        <article>
+                            <button onClick={handleSearchMovie}>
+                                <MagnifyingGlass size={23} />
+                            </button>
+                        </article>
 
                         <Style.SelectMovie>
                             <select id="selectMovie" {...register("movieSelected")}>
@@ -122,6 +128,7 @@ function CommentContainer({SetIsNewPost}: ICommentContainerProps) {
                         id="comment"
                         register={register}
                         errors={errors}
+                        placeholder="insira um comentário (opcional)"
                     /> 
                     {
                         errors.comment &&

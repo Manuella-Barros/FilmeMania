@@ -24,6 +24,10 @@ export const Profile = styled.section`
             width: 50px;
             height: 5px;
         }
+
+        &:first-child{
+            text-transform: capitalize;
+        }
     }
 
 `

@@ -16,7 +16,7 @@ function InputField<T extends FieldValues>({label, register, errors, ...props}: 
         return(
             <Style.InputField>
                 <label htmlFor="comment">Comentário</label>
-                <textarea {...register(props.id as Path<T> )} id="comment" rows={7}/>
+                <textarea {...register(props.id as Path<T> )} placeholder={props.placeholder} id="comment" rows={7}/>
             </Style.InputField>
         )
     } else if(props.id == "favGenre"){

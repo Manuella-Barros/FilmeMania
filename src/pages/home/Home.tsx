@@ -6,12 +6,13 @@ import CommentContainer from "./components/CommentContainer";
 import { GlobalContext } from "../../context/GlobalContext";
 
 export interface IMovie {
-    comment: string,
+    id: string,
     created_at: string,
     fk_user_id: string,
-    id: string,
+    comment: string,
     movie_id: string,
     rating: string,
+    movie_title: string,
 }
 
 function Home() {

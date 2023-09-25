@@ -1,8 +1,9 @@
 import { getMoviesByName } from "../fetch/API_TMDB";
 import { LoginData } from "../pages/account/components/Login";
+import { IMovie } from "../pages/home/Home";
 import { CommentContainerData } from "../pages/home/components/CommentContainer";
 import { supabase } from "./supabase.config";
-import { ISelectUserByIdReturn, LoginUserReturn, SelectGenresReturn } from "./supabaseActionsInterface";
+import { ISelectUserByIdReturn, IUserFavGenres, LoginUserReturn, SelectGenresReturn } from "./supabaseActionsInterface";
 
 export async function createUser(name: string, password: string){
     await verifyUsername(name)
@@ -93,7 +94,7 @@ export async function verifyUsername(name: string){
     return true;
 }
 
-export async function insertPost(postInfo: CommentContainerData, userID: string){
+export async function insertPost(postInfo: CommentContainerData, userID: string, movieName: string){
     const movieID = await getMoviesByName(postInfo.movieSelected)
     
     const { error } = await supabase.from("posts").insert({
@@ -101,6 +102,7 @@ export async function insertPost(postInfo: CommentContainerData, userID: string)
         comment: postInfo.comment,
         movie_id: movieID[0].id,
         rating: postInfo.stars,
+        movie_title: movieName,
     })
 
     if(error){
@@ -109,7 +111,7 @@ export async function insertPost(postInfo: CommentContainerData, userID: string)
 
 }
 
-export async function selectAllPosts(){
+export async function selectAllPosts(): Promise<IMovie[] | false>{
     const { error, data } = await supabase.from("posts").select()
 
     if(error){
@@ -127,7 +129,7 @@ export async function selectUserById(id: string): Promise<ISelectUserByIdReturn 
         const genres = await selectGenreById(data.id)
         
         if(genres){
-            return {...data, genres}
+            return {...data, genres }
         }
         
     }
