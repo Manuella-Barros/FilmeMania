@@ -41,7 +41,7 @@ function CommentContainer({SetIsNewPost}: ICommentContainerProps) {
 
     function handleFormSubmit(data: CommentContainerData){
         if(loggedUser){
-            insertPost(data, loggedUser?.user_id, watch("movieName"));
+            insertPost(data, loggedUser?.user_id);
             SetIsNewPost(true)
             reset();
             setMovieImage(null)

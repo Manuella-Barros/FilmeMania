@@ -112,7 +112,7 @@ export async function verifyUsername(name: string){
     return true;
 }
 
-export async function insertPost(postInfo: CommentContainerData, userID: string, movieName: string){
+export async function insertPost(postInfo: CommentContainerData, userID: string){
     const movieID = await getMoviesByName(postInfo.movieSelected)
     
     const { error } = await supabase.from("posts").insert({
@@ -120,7 +120,7 @@ export async function insertPost(postInfo: CommentContainerData, userID: string,
         comment: postInfo.comment,
         movie_id: movieID[0].id,
         rating: postInfo.stars,
-        movie_title: movieName,
+        movie_title: postInfo.movieSelected,
     })
 
     if(error){
