@@ -4,7 +4,7 @@ import { LoginData } from "../pages/account/components/Login";
 import { IMovie } from "../pages/home/Home";
 import { CommentContainerData } from "../pages/home/components/CommentContainer";
 import { supabase } from "./supabase.config";
-import { IGenres, ISelectUserByIdReturn, IUserFavGenres, LoginUserReturn, SelectGenresReturn } from "./supabaseActionsInterface";
+import { IGenres, ISelectUserByIdReturn, LoginUserReturn, SelectGenresReturn } from "./supabaseActionsInterface";
 
 export async function createUser(name: string, password: string){
     await verifyUsername(name)
