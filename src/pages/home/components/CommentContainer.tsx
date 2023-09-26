@@ -100,9 +100,15 @@ function CommentContainer({SetIsNewPost}: ICommentContainerProps) {
                                 
                                 {
                                     searchedMovies && 
-                                    searchedMovies.map(movie => {
-                                        return <option key={movie.id} value={movie.title}>{movie.title}</option>
-                                    })
+                                    <>
+                                        <option value=''>Selecionar</option>
+                                        {
+                                            searchedMovies.map(movie => {
+                                                return <option key={movie.id} value={movie.title}>{movie.title}</option>
+                                            })
+                                        }
+                                    
+                                    </>
                                 }
                             </select>
                             {

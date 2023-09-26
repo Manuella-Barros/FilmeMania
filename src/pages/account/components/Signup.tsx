@@ -36,7 +36,7 @@ const schema = z.object({
     favGenre2: z.string(),
     favGenre3: z.string(),
 
-}).refine((values) => values.favGenre1 != "" && values.favGenre2 != "" && values.favGenre3 != "", {
+}).refine((values) => values.favGenre1 != '' && values.favGenre2 != '' && values.favGenre3 != '', {
     path: ["favGenre1"],
     message: "Escolher as três opções"
 
@@ -60,7 +60,7 @@ function Signup() {
                     insertUserFavGenres(userId[0].id, data.favGenre3);
                 }
 
-                navigate("/");
+                navigate("/account/login");
             }).catch((res) => setError(res.message));
     }
 

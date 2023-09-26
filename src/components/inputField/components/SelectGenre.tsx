@@ -24,6 +24,7 @@ function SelectGenre<T extends FieldValues> ({register, id}: SelectGenreProps<T>
     if(allGenres){
         return (
             <select className="favGenre" {...register(`favGenre${id}` as Path<T>)}>
+            <option value=''>Selecionar</option>    
                 {
                     allGenres.map((genre, i) => {
                         return <option key={i} value={genre.name}> {genre.name} </option>
