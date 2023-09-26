@@ -48,7 +48,7 @@ export const GlobalStyle = createGlobalStyle`
     main {
         max-width: 70rem;
         min-height: 90vh;
-        display: flex !important;
+        display: flex;
         margin: auto;
         margin-block: 3rem;
     }

@@ -3,6 +3,7 @@ import { keyframes, styled } from "styled-components";
 export const Main = styled.main`
     background-color: white;
     border-radius: 12px;
+    display: flex !important;
 
     picture, article {
         width: 50%;
