@@ -4,6 +4,10 @@ export const Main = styled.main`
     display: flex;
     gap: 2rem;
     justify-content: space-between;
+
+    @media(max-width: 520px){
+        flex-direction: column;
+    }
 `
 
 export const Profile = styled.section`
@@ -30,6 +34,10 @@ export const Profile = styled.section`
         }
     }
 
+    @media(max-width: 520px){
+        margin: auto;
+        width: 85vw;
+    }
 `
 
 export const Movies = styled.section`
@@ -43,6 +51,17 @@ export const Movies = styled.section`
         color: white;
         font-family: ${({theme}) => theme.FONT.SECONDARY};
         font-size: 2rem;
+    }
+
+    @media(max-width: 520px){
+        margin: auto;
+        width: 100vw;
+
+        h1 {
+            //text-align: center;
+            position: relative;
+            left: 7.5%;
+        }
     }
 `
 

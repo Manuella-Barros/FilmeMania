@@ -1,9 +1,10 @@
+import { PostgrestError } from "@supabase/supabase-js";
 import { getMoviesByName } from "../fetch/API_TMDB";
 import { LoginData } from "../pages/account/components/Login";
 import { IMovie } from "../pages/home/Home";
 import { CommentContainerData } from "../pages/home/components/CommentContainer";
 import { supabase } from "./supabase.config";
-import { ISelectUserByIdReturn, IUserFavGenres, LoginUserReturn, SelectGenresReturn } from "./supabaseActionsInterface";
+import { IGenres, ISelectUserByIdReturn, IUserFavGenres, LoginUserReturn, SelectGenresReturn } from "./supabaseActionsInterface";
 
 export async function createUser(name: string, password: string){
     await verifyUsername(name)
@@ -67,15 +68,32 @@ export async function selectGenres(): Promise<SelectGenresReturn[] | false>{
     }
 }
 
-export async function selectGenreById(id: string){
-    const { error, data } = await supabase.from("fav_genres").select("genres(name)").eq("fk_user_id", id);
+function isGenreArray(obj: unknown ) : obj is IGenres[]{
+    if(!Array.isArray(obj)){
+        return false
+    }
+
+    if('genres' in obj[0] && 'name' in obj[0].genres ){
+        return true
+    }
+
+    return false
+}
+
+export async function selectGenreById(id: string): Promise<IGenres[] | false>{
+    const { data, error } : {data: unknown, error: PostgrestError |  null}  = await supabase.from("fav_genres").select("genres(name)").eq("fk_user_id", id);
 
     if( error ){
         console.log("erro")
         console.log(error)
         return false;
+
     } else {
-        return data;
+        if(isGenreArray(data)){
+            return data;
+        }
+        
+        return false
     }
 }
 

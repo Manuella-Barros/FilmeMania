@@ -13,12 +13,15 @@ export interface IUserFavGenres {
     }
 }
 
+export interface IGenres{ 
+    genres: { 
+        name: any; 
+    };
+}
+
 export interface ISelectUserByIdReturn {
     id: string, 
     username: string,
-    genres: {
-        genres: {
-            name: string
-        }
-    }[],
+    genres: IGenres[],
 }
+

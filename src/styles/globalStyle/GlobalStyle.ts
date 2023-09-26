@@ -1,5 +1,10 @@
-import styled, { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle, keyframes } from "styled-components";
 
+const show = keyframes`
+    100%{
+        opacity: 1
+    }
+`
 export const GlobalStyle = createGlobalStyle`
     * {
         padding: 0;
@@ -8,9 +13,32 @@ export const GlobalStyle = createGlobalStyle`
         transition: 0.5s;
     }
 
+    div[data-radix-popper-content-wrapper]{
+        transition: none !important;
+    }
+
     body {
         background-image: ${({theme}) => theme.COLORS.GRADIENT};
         font-family: ${({theme}) => theme.FONT.PRIMARY};
+    }
+
+    body:has(div[data-radix-popper-content-wrapper]) main{
+        &:before{
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,.4);
+            z-index: 1;
+            opacity: 0;
+            animation: ${show} 400ms forwards;
+        }
+    }
+
+    #root{
+        overflow-x: hidden;
     }
     
     h1 {
@@ -28,6 +56,13 @@ export const GlobalStyle = createGlobalStyle`
     a {
         text-decoration: none;
         font-size: 1.5rem;
+    }
+
+    @media(max-width: 520px){
+        main{
+            width: 100%;
+            height: 100%;
+        }
     }
 `
 

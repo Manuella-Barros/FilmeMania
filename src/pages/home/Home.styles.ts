@@ -5,6 +5,10 @@ export const AllMovies = styled.article`
     flex-wrap: wrap;
     gap: 2rem;
     justify-content: center;
+
+    @media(max-width: 520px){
+        flex-direction: column;
+    }
 `
 
 export const Main = styled.main`
@@ -22,7 +26,9 @@ export const CommentContainer = styled.article`
     gap: 2rem;
     min-height: 18rem;
     height: 18rem;
-    
+            @media (max-width: 550px) {
+height: auto;
+            }
     picture{
         width: 40%;
         img{
@@ -33,6 +39,22 @@ export const CommentContainer = styled.article`
             clip-path: polygon(0 0, 88% 0, 100% 100%, 0% 100%);
         }
     }
+
+    @media(max-width: 520px){
+        width: 85vw;
+        height: auto;
+        flex-direction: column;
+
+        picture{
+            width: 100%;
+            height: 60%;
+
+            img{
+                border-radius: 10px 10px 0px 0px;
+                clip-path: none;
+            }
+        }
+    }
 `
 
 export const CommentForm = styled.form`
@@ -41,12 +63,22 @@ export const CommentForm = styled.form`
     gap: 1.5rem;
     padding: 2rem 2rem 2rem 0;
 
+        @media (max-width: 550px) {
+        flex-direction: column;
+    }
+
     section{
         width: 100%;
         
         div button{
             width: 50%;
         }
+    }
+
+    @media(max-width: 520px){
+        width: 100%;
+        height: 40%;
+        padding: 0 1rem 1rem 1rem;
     }
 `
 

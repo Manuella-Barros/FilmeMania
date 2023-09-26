@@ -18,6 +18,20 @@ export const Main = styled.main`
             height: 100%;
         }
     }
+
+    @media(max-width: 520px){
+        flex-direction: column;
+        width: 85vw;
+
+        picture, article {
+            width: 100%;
+        }
+
+        picture{
+            clip-path: none;
+
+        }
+    }
 `
 const show = keyframes`
     0%{
@@ -43,6 +57,12 @@ export const AccountContent = styled.article`
 
     form{
         width: 70%;
+    }
+
+    @media(max-width: 520px){
+        form{
+            width: 80%;
+        }
     }
 `
 
