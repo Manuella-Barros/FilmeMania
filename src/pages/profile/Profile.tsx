@@ -25,13 +25,7 @@ function Profile() {
         }).then(res => {
            if(res){ setPosts(res) }
         });
-        // selectAllPosts().then(posts => {
-        //     if(posts){
-        //         setPosts(posts)
-        //     }
-        // });
 
-        
     }, [])
 
     function handlePesquisarFilme(){
@@ -82,7 +76,7 @@ function Profile() {
                             rating={post.rating}
                             userID={post.fk_user_id}
                         />
-                    }).reverse()
+                    })
                 }
                 {
                     filteredPosts && filteredPosts?.map(post => {
@@ -93,7 +87,7 @@ function Profile() {
                             rating={post.rating}
                             userID={post.fk_user_id}
                         />
-                    }).reverse()
+                    })
                 }
 
             </Style.Movies>

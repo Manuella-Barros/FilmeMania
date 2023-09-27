@@ -25,7 +25,7 @@ interface ICommentContainerProps {
     SetIsNewPost: Dispatch<SetStateAction<boolean>>;
 }
 function CommentContainer({SetIsNewPost}: ICommentContainerProps) {
-    const { register, handleSubmit, formState:{errors}, watch, reset } = useForm<CommentContainerData>({
+    const { register, handleSubmit, formState:{errors}, watch, reset,setValue} = useForm<CommentContainerData>({
         resolver: zodResolver(schema),
         defaultValues:{
             movieName: "",
@@ -35,11 +35,12 @@ function CommentContainer({SetIsNewPost}: ICommentContainerProps) {
         }
     });
     const { loggedUser } = useContext(GlobalContext);
-    
     const [ searchedMovies, setSearchedMovies ] = useState<IGetMoviesByNameReturn[] | null>(null);
     const [ movieImage, setMovieImage ] = useState<string | null>(null);
+    const [ starsChanged, setStarsChanged ] = useState<number>(1);
 
     function handleFormSubmit(data: CommentContainerData){
+        console.log(data)
         if(loggedUser){
             insertPost(data, loggedUser?.user_id);
             SetIsNewPost(true)
@@ -56,6 +57,10 @@ function CommentContainer({SetIsNewPost}: ICommentContainerProps) {
         }
     }
 
+    useEffect(() => {
+        setValue("stars", starsChanged.toString());
+    }, [starsChanged])
+    
     useEffect(() => {
         if(watch("movieSelected")){
             getMoviesByName(watch("movieSelected")).then(res => setMovieImage(res[0].poster_path))
@@ -85,7 +90,7 @@ function CommentContainer({SetIsNewPost}: ICommentContainerProps) {
                             errors={errors}
                         />
                         <article>
-                            <button onClick={handleSearchMovie}>
+                            <button type="button" onClick={handleSearchMovie}>
                                 <MagnifyingGlass size={23} />
                             </button>
                         </article>
@@ -124,6 +129,7 @@ function CommentContainer({SetIsNewPost}: ICommentContainerProps) {
                             styleType={"selectedString"}
                             id={"stars"}
                             register={register}
+                            setStarsChanged={setStarsChanged}
                         />
                     </div>
                 </Style.RatingContainer>

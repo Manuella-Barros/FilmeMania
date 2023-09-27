@@ -49,7 +49,7 @@ function Home() {
                             movieID={movie.movie_id}
                             rating={movie.rating}
                         />
-                    }).reverse()
+                    })//.reverse()
                 }
             </Style.AllMovies>
         </Style.Main>

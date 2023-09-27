@@ -130,7 +130,7 @@ export async function insertPost(postInfo: CommentContainerData, userID: string)
 }
 
 export async function selectAllPosts(): Promise<IMovie[] | false>{
-    const { error, data } = await supabase.from("posts").select()
+    const { error, data } = await supabase.from("posts").select() .order('created_at', { ascending: false })
 
     if(error){
         console.log(error);
