@@ -25,7 +25,7 @@ interface ICommentContainerProps {
     SetIsNewPost: Dispatch<SetStateAction<boolean>>;
 }
 function CommentContainer({SetIsNewPost}: ICommentContainerProps) {
-    const { register, handleSubmit, formState:{errors}, watch, reset,setValue} = useForm<CommentContainerData>({
+    const { register, handleSubmit, formState:{errors}, watch, reset, setValue} = useForm<CommentContainerData>({
         resolver: zodResolver(schema),
         defaultValues:{
             movieName: "",
@@ -40,15 +40,13 @@ function CommentContainer({SetIsNewPost}: ICommentContainerProps) {
     const [ starsChanged, setStarsChanged ] = useState<number>(1);
 
     function handleFormSubmit(data: CommentContainerData){
-        console.log(data)
         if(loggedUser){
             insertPost(data, loggedUser?.user_id);
             SetIsNewPost(true)
             reset();
             setMovieImage(null)
+            setSearchedMovies(null);
         }
-
-        setSearchedMovies(null);
     }
 
     function handleSearchMovie(){
