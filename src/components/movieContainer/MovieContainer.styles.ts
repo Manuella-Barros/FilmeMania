@@ -1,6 +1,7 @@
 import { styled } from "styled-components";
 
 export const Container = styled.section`
+    overflow: hidden;
     display: flex;
     flex-wrap: wrap;
     min-width: 320px;
