@@ -33,10 +33,10 @@ function MovieContainer(data: IMovieCOntainer) {
                     <h2>{movieData.title}</h2>
                     <div>
                         {
-                            movieData?.genres[0]?.name && <h3>{movieData.genres[0].name}</h3>
+                            movieData?.genres && movieData?.genres[0]?.name && <h3>{movieData.genres[0].name}</h3>
                         }
                         {
-                            movieData?.genres[1]?.name && <h3>{movieData.genres[1].name}</h3>
+                            movieData?.genres && movieData?.genres[1]?.name && <h3>{movieData.genres[1].name}</h3>
                         }
                     </div>
                     <RatingStars stars={data.rating}/>
